@@ -8,6 +8,7 @@ using Ecommerce.Web.Contract.Api.AppAuth.Requests;
 using Ecommerce.Web.Contract.Api.AppAuth.Responses;
 using Ecommerce.Web.Contract.ApiRoutes;
 using Ecommerce.Web.Contract.Models.AppUser;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,40 +17,22 @@ namespace Ecommerce.Web.Controllers
     [Route(ApiRoutes.Api + "/v1/app-auth")]
     public class AppAuthController : BaseController
     {
-        private readonly IAppUserRepository _appUserRepository;
-
-        public AppAuthController(IMapper mapper, IAppUserRepository appUserRepository) : base(mapper)
+        public AppAuthController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
         {
-            _appUserRepository = appUserRepository;
+            
         }
 
         [HttpPost("login"), AllowAnonymous]
         public async Task<LoginResponse> Login([FromBody] LoginRequest request)
         {
-            var user = await _appUserRepository.GetByEmailAsync(request.Email);
-
-            if (user == null || HashUtil.VerifyEquality(user.HashedPassword, request.Password))
-            {
-                throw new BaseException(ErrorCodes.AppAuth.UserNotFoundError);
-            }
-            
-            return new LoginResponse()
-            {
-                User = Map<AppUserModel, AppUserEntity>(user)
-            };
+            return await _mediator.Send(request);
         }
         
         [HttpPost("register"), AllowAnonymous]
-        public async Task<RegisterResponse> Register()
+        public async Task<RegisterResponse> Register([FromBody] RegisterRequest request)
         {
-            Console.WriteLine("Register");
-            
-            throw new UserException(ErrorCodes.AppUser.AccessToResourceDenied);
-
-            return new RegisterResponse()
-            {
-
-            };
+            return await _mediator.Send(request);
         }
+        
     }
 }

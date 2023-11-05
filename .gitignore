@@ -270,3 +270,5 @@ __pycache__/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+/Ecommerce.Web/appsettings.Development.json

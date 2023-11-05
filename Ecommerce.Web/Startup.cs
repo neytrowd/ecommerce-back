@@ -21,6 +21,7 @@ namespace Ecommerce.Web
             services.AddDatabaseConfiguration(Configuration);
             services.AddServicesConfiguration();
             services.AddSwaggerConfiguration();
+            services.AddMediatrConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

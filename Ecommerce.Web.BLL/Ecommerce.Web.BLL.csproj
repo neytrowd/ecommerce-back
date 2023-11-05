@@ -8,12 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+      <PackageReference Include="MediatR" Version="12.1.1" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Ecommerce.DAL\Ecommerce.DAL.csproj" />
       <ProjectReference Include="..\Ecommerce.Entities\Ecommerce.Entities.csproj" />
       <ProjectReference Include="..\Ecommerce.Web.Contract\Ecommerce.Web.Contract.csproj" />
+      <ProjectReference Include="..\Ecommerce.Web.Options\Ecommerce.Web.Options.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="RequestHandlers\AppAuth\Validators\" />
     </ItemGroup>
 
 </Project>

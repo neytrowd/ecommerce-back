@@ -13,10 +13,10 @@ namespace Ecommerce.DAL.Repositories.AppUser
         {
         }
 
-        public Task<AppUserEntity> GetByEmailAsync(string email)
+        public Task<AppUserEntity> GetByEmailAsync(string email, CancellationToken token)
         {
             return _dbSet
-                .FirstOrDefaultAsync(x => x.Email == email && x.DeletedTime == null);
+                .FirstOrDefaultAsync(x => x.Email == email && x.DeletedTime == null, token);
         }
 
         public Task<bool> IsExistsAsync(long appUserId, CancellationToken token)

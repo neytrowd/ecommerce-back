@@ -24,7 +24,6 @@ namespace Ecommerce.Web.Configurations
                     logger.LogError(exception.ToString());
 
                     var errorsFactory = context.RequestServices.GetRequiredService<IErrorsFactory>();
-
                     var error = errorsFactory.CreateBaseError(context, exception, StatusCodes.Status400BadRequest);
 
                     context.Response.StatusCode = error.Status ?? StatusCodes.Status500InternalServerError;

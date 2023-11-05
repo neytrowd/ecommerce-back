@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Ecommerce.Common.Extensions;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +14,12 @@ namespace Ecommerce.Web.Controllers
 
         private readonly IMapper _mapper;
 
-        public BaseController(IMapper mapper)
+        protected readonly IMediator _mediator;
+
+        public BaseController(IMapper mapper, IMediator mediator)
         {
             _mapper = mapper;
+            _mediator = mediator;
         }
 
         protected TDest Map<TDest, TSource>(TSource source)
@@ -36,9 +41,10 @@ namespace Ecommerce.Web.Controllers
                     return _applicationUserId.Value;
                 }
 
-                _applicationUserId = 0;
+                var applicationUserId = HttpContext.GetApplicationUserId();
+                _applicationUserId = applicationUserId;
 
-                return _applicationUserId.Value;
+                return applicationUserId;
             }
         }
     }
