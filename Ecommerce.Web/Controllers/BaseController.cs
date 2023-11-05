@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Web.Controllers
@@ -9,11 +10,23 @@ namespace Ecommerce.Web.Controllers
     {
         private long? _applicationUserId;
 
-        public BaseController()
+        private readonly IMapper _mapper;
+
+        public BaseController(IMapper mapper)
         {
-            
+            _mapper = mapper;
         }
 
+        protected TDest Map<TDest, TSource>(TSource source)
+        {
+            return _mapper.Map<TDest>(source);
+        }
+        
+        protected TDest Map<TDest>(object source)
+        {
+            return _mapper.Map<TDest>(source);
+        }
+        
         protected long ApplicationUserId
         {
             get

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Ecommerce.DAL.Data
@@ -10,6 +11,8 @@ namespace Ecommerce.DAL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(EcommerceDbContext)));
         }
         
         public IDbContextTransaction BeginTransaction()

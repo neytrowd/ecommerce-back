@@ -5,7 +5,7 @@ namespace Ecommerce.Common.Contract.Errors.Exceptions
     {
         public ErrorDetail[] Errors { get; private set; }
 
-        public BaseException(string errorCode, string message = null, string[] localizationParams = null)
+        public BaseException(string errorCode, string message = null)
         {
             Errors = new[]
             {
