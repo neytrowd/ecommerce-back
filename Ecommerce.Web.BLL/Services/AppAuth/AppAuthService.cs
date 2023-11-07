@@ -4,12 +4,12 @@ using System.Text;
 using Ecommerce.Common.Constants;
 using Ecommerce.Common.Extensions;
 using Ecommerce.Entities;
+using Ecommerce.Web.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ShipCheaper.Web.Options;
 
 namespace Ecommerce.Web.BLL.Services.AppAuth
 {

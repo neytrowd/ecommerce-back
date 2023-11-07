@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Web.Configurations;
-using ShipCheaper.Web.Options;
+using Ecommerce.Web.Options;
 
 namespace Ecommerce.Web
 {

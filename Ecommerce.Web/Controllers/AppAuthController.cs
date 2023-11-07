@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using Ecommerce.Common.Contract.Errors;
-using Ecommerce.Common.Contract.Errors.Exceptions;
-using Ecommerce.Common.Utils;
-using Ecommerce.DAL.Repositories.AppUser;
-using Ecommerce.Entities;
 using Ecommerce.Web.Contract.Api.AppAuth.Requests;
 using Ecommerce.Web.Contract.Api.AppAuth.Responses;
 using Ecommerce.Web.Contract.ApiRoutes;
-using Ecommerce.Web.Contract.Models.AppUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

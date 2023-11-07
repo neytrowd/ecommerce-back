@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ShipCheaper.Web.Options
+namespace Ecommerce.Web.Options
 {
     public class AuthOptions
     {

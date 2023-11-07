@@ -10,6 +10,7 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+      <PackageReference Include="MailKit" Version="4.2.0" />
       <PackageReference Include="MediatR" Version="12.1.1" />
     </ItemGroup>
 
@@ -22,6 +23,7 @@
 
     <ItemGroup>
       <Folder Include="RequestHandlers\AppAuth\Validators\" />
+      <Folder Include="RequestHandlers\Email\Validators\" />
     </ItemGroup>
 
 </Project>
