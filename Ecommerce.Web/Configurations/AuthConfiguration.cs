@@ -16,7 +16,6 @@ namespace Ecommerce.Web.Configurations
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        ClockSkew = TimeSpan.Zero,
                         ValidIssuer = authOptions.Issuer,
                         ValidAudience = authOptions.Audience,
                         IssuerSigningKey = authOptions.SymmetricKey
@@ -28,10 +27,10 @@ namespace Ecommerce.Web.Configurations
             return services;
         }
 
-        public static IApplicationBuilder UseAuthConfiguration(this IApplicationBuilder appBuilder)
+        public static IApplicationBuilder UseAuthConfiguration(this IApplicationBuilder app)
         {
-            var authOptions = appBuilder.ApplicationServices.GetService<IOptions<AuthOptions>>();
-            appBuilder.Use(async (context, next) =>
+            var authOptions = app.ApplicationServices.GetService<IOptions<AuthOptions>>();
+            app.Use(async (context, next) =>
             {
                 var token = context.Request.Cookies[authOptions.Value.CookiesName];
                 if (!string.IsNullOrEmpty(token))
@@ -40,9 +39,10 @@ namespace Ecommerce.Web.Configurations
                 await next();
             });
 
-            appBuilder.UseAuthentication();
-            appBuilder.UseAuthorization();
-            return appBuilder;
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
+            return app;
         }
     }
 }

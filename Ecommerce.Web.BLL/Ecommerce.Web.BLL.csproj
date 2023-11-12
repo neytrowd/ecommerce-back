@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <Folder Include="RequestHandlers\AppAuth\Validators\" />
+      <Folder Include="RequestHandlers\AppUser\Validators\" />
       <Folder Include="RequestHandlers\Email\Validators\" />
     </ItemGroup>
 

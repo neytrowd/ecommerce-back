@@ -52,7 +52,16 @@ namespace Ecommerce.Web.BLL.RequestHandlers.AppAuth.Handlers
                 LastName = request.LastName,
                 Email = request.Email,
                 HashedPassword = HashUtil.Hash(request.Password),
-                CreatedTime = DateTime.UtcNow.RoundToSeconds()
+                CreatedTime = DateTime.UtcNow.RoundToSeconds(),
+                EmailTokens = new List<EmailTokenEntity>()
+                {
+                    new EmailTokenEntity()
+                    {
+                        EmailType = EmailType.ConfirmEmail,
+                        CreatedTime = DateTime.Now.RoundToSeconds(),
+                        Code = Guid.NewGuid().ToString()
+                    }
+                }
             };
 
             _appUserRepository.Add(user);
@@ -66,7 +75,7 @@ namespace Ecommerce.Web.BLL.RequestHandlers.AppAuth.Handlers
                     To = user.Email,
                     FirstName = user.FirstName,
                     Host = _httpContext.HttpContext.GetHeaderOrigin(),
-                    Token = Guid.NewGuid().ToString(),
+                    Token = user.EmailTokens.FirstOrDefault(x => x.EmailType == EmailType.ConfirmEmail).Code,
                     Type = EmailType.ConfirmEmail
                 }
             });

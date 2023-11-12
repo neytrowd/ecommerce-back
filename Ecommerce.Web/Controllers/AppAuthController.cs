@@ -2,18 +2,25 @@
 using Ecommerce.Web.Contract.Api.AppAuth.Requests;
 using Ecommerce.Web.Contract.Api.AppAuth.Responses;
 using Ecommerce.Web.Contract.ApiRoutes;
+using Ecommerce.Web.Options;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Ecommerce.Web.Controllers
 {
     [Route(ApiRoutes.Api + "/v1/app-auth")]
     public class AppAuthController : BaseController
     {
-        public AppAuthController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
+        private readonly AuthOptions _authOptions;
+        
+        public AppAuthController(
+            IMapper mapper, 
+            IMediator mediator,
+            IOptions<AuthOptions> authOptions) : base(mapper, mediator)
         {
-            
+            _authOptions = authOptions.Value;
         }
 
         [HttpPost("login"), AllowAnonymous]
@@ -28,5 +35,15 @@ namespace Ecommerce.Web.Controllers
             return await _mediator.Send(request);
         }
         
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Response.Cookies.Delete(_authOptions.CookiesName, new CookieOptions()
+            {
+                Domain = _authOptions.Domain
+            });
+
+            return NoContent();
+        }
     }
 }

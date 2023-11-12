@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Web.Controllers
 {
-    [Authorize]
     [ApiController]
+    [Authorize]
     public abstract class BaseController: Controller
     {
         private long? _applicationUserId;

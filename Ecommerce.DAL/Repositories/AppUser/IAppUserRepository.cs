@@ -6,6 +6,8 @@ namespace Ecommerce.DAL.Repositories.AppUser
     {
         Task<AppUserEntity> GetByEmailAsync(string email, CancellationToken token);
 
+        Task<AppUserEntity> GetByUserIdAsync(long userId, CancellationToken token);
+        
         Task<bool> IsExistsAsync(long appUserId, CancellationToken token);
     }
 }

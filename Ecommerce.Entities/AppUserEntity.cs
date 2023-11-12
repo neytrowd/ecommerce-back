@@ -16,6 +16,8 @@ namespace Ecommerce.Entities
 
         public string HashedPassword { get; set; }
 
+        public List<EmailTokenEntity> EmailTokens { get; set; }
+        
         public DateTime CreatedTime { get; set; }
         
         public DateTime? DeletedTime { get; set; }

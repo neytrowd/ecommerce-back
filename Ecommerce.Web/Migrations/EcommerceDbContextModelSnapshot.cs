@@ -59,6 +59,50 @@ namespace Ecommerce.Web.Migrations
 
                     b.ToTable("Users", (string)null);
                 });
+
+            modelBuilder.Entity("Ecommerce.Entities.EmailTokenEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AppUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("EmailType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("EmailTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Entities.EmailTokenEntity", b =>
+                {
+                    b.HasOne("Ecommerce.Entities.AppUserEntity", "AppUser")
+                        .WithMany("EmailTokens")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Ecommerce.Entities.AppUserEntity", b =>
+                {
+                    b.Navigation("EmailTokens");
+                });
 #pragma warning restore 612, 618
         }
     }

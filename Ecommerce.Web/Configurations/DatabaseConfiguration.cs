@@ -22,9 +22,9 @@ namespace Ecommerce.Web.Configurations
             return services;
         }
 
-        public static IApplicationBuilder UseDatabaseConfiguration(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseDatabaseConfiguration(this IApplicationBuilder app)
         {
-            using var serviceScope = builder.ApplicationServices
+            using var serviceScope = app.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
 
@@ -35,7 +35,7 @@ namespace Ecommerce.Web.Configurations
             connection.Open();
             connection.ReloadTypes();
 
-            return builder;
+            return app;
         }
     }
 }   

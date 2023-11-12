@@ -37,10 +37,7 @@ namespace Ecommerce.Web.BLL.Services.AppAuth
             };
 
             var algorithm = SecurityAlgorithms.HmacSha256;
-
-            var signingCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_authOptions.Secret)
-                ), algorithm);
+            var signingCredentials = new SigningCredentials(_authOptions.SymmetricKey, algorithm);
 
             var token = new JwtSecurityToken(
                 _authOptions.Issuer,
